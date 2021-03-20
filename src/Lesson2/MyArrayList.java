@@ -1,10 +1,19 @@
 package Lesson2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MyArrayList<T extends Comparable<T>> {
     private T[] list;
     private int size;
     private int capacity;
     private final int DEFAULT_CAPACITY = 10;
+    private final double LOAD_FACTOR = 0.75;
+
+    public int getCapacity() {
+        return capacity;
+    }
 
     public MyArrayList(int capacity) {
         if (capacity <= 0) {
@@ -19,13 +28,33 @@ public class MyArrayList<T extends Comparable<T>> {
         list = (T[]) new Comparable[capacity];
     }
 
+    public void checkLoadFactor() {
+        double loadFactor = (double) size / capacity;
+        if (loadFactor > LOAD_FACTOR) {
+            capacity = (int) (capacity * 1.5);
+            T[] newList = (T[]) new Comparable[capacity];
+            for (int i = 0; i < size; i++) {
+                newList[i] = list[i];
+            }
+            list = newList;
+        }
+    }
+
+    public void checkIndex(int index) {
+        if (index < 0 || index >= capacity) throw new RuntimeException("Недопустимое значение индекса: " + index );
+    }
+
     public void add(T item) {
+        checkLoadFactor();
         // доделать проверку на превышение лоад фактора 0.75
+        if (size == capacity) throw new RuntimeException("Массив переполнен");
         list[size] = item;
         size++;
     }
 
     public void add(int index, T item) {
+        checkLoadFactor();
+        checkIndex(index);
         // доделать проверку на превышение лоад фактора 0.75
         // доделать проверку на допустимость индекса
         for (int i = size; i > index; i--) {
@@ -37,6 +66,7 @@ public class MyArrayList<T extends Comparable<T>> {
 
     public final T remove(int index) {
         // доделать проверку на допустимость индекса
+        checkIndex(index);
         T temp = list[index];
         for (int i = index; i < size; i++) {
             list[i] = list[i + 1];
@@ -65,11 +95,13 @@ public class MyArrayList<T extends Comparable<T>> {
     }
 
     public T get(int index) {
+        checkIndex(index);
         // доделать проверку на допустимость индекса
         return list[index];
     }
 
     public void set(int index, T item) {
+        checkIndex(index);
         // доделать проверку на допустимость индекса
 
         list[index] = item;
@@ -150,7 +182,7 @@ public class MyArrayList<T extends Comparable<T>> {
                     isSwap = true;
                 }
             }
-            if( !isSwap){
+            if (!isSwap) {
                 break;
             }
         }

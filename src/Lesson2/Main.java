@@ -1,5 +1,6 @@
 package Lesson2;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +10,36 @@ import java.util.function.UnaryOperator;
 
 public class Main {
     public static void main(String[] args) {
+
+        MyArrayList<Integer> alist = new MyArrayList<>(5);
+        alist.add(2);
+        for (int i = 0; i < 100000; i++) {
+            alist.add(3 + (int)(Math.random() * 800000));
+        }
+//        System.out.println(alist);
+//        System.out.println("Объем массива: " + alist.getCapacity());
+
+        long start;
+        long finish;
+
+//        start = System.currentTimeMillis();
+//        alist.insertionSort();
+//        finish = System.currentTimeMillis();
+//        System.out.println("Метод вставки:" + (finish - start));
+//        System.out.println(alist);
+
+//        start = System.currentTimeMillis();
+//        alist.selectionSort();
+//        finish = System.currentTimeMillis();
+//        System.out.println("Селекторный метод:" + (finish - start));
+//        System.out.println(alist);
+
+        start = System.currentTimeMillis();
+        alist.bubbleSortO();
+        finish = System.currentTimeMillis();
+        System.out.println("Метод пузырька:" + (finish - start));
+        System.out.println(alist);
+
 //        int[] arr = new int[10];
 //
 //        for (int i = 0; i < arr.length; i++) {
@@ -60,7 +91,6 @@ public class Main {
 //        System.out.println(list);
 
 
-
 //        MyArrayList<Integer> mal = new MyArrayList<>();
 //        mal.add(5);
 //        mal.add(8);
@@ -87,20 +117,20 @@ public class Main {
 //        System.out.println(msal.binaryIndexOf(1));
 
 
-        Random r = new Random();
-        MyArrayList<Integer> mal = new MyArrayList<>(10);
-        for (int i = 0; i < 10; i++) {
-            mal.add(r.nextInt(100));
-        }
-        System.out.println(mal);
-
-
-//        mal.selectionSort();
-//        mal.insertionSort();
-        mal.bubbleSort();
-
-
-        System.out.println(mal);
+//        Random r = new Random();
+//        MyArrayList<Integer> mal = new MyArrayList<>(10);
+//        for (int i = 0; i < 10; i++) {
+//            mal.add(r.nextInt(100));
+//        }
+//        System.out.println(mal);
+//
+//
+////        mal.selectionSort();
+////        mal.insertionSort();
+//        mal.bubbleSort();
+//
+//
+//        System.out.println(mal);
 
     }
 }
