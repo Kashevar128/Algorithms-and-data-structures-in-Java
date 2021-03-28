@@ -1,6 +1,7 @@
 package lesson4;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -20,58 +21,77 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     private class Iter implements Iterator<T> {
-        Node current = new Node(null, first);
+        Node currentBegin = new Node(null, first);
+        Node currentEnd = new Node(last, null, null);
+        boolean invert = false;
+        int index = -1;
 
         @Override
         public boolean hasNext() {
-            return current.getNext() != null;
+            return currentBegin.getNext() != null;
         }
 
         @Override
         public T next() {
-            current = current.getNext();
-            return current.getValue();
+            invert = false;
+            currentBegin = currentBegin.getNext();
+            index++;
+            return currentBegin.getValue();
         }
     }
 
     private class ListIter extends Iter implements ListIterator<T> {
-        int index = 0;
 
         @Override
         public boolean hasPrevious() {
-            return current.getPrev() != null;
+            return currentEnd.getPrev() != null;
         }
 
         @Override
         public T previous() {
-            return null;
+            invert = true;
+            currentEnd = currentEnd.getPrev();
+            index--;
+            return currentEnd.getValue();
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            return index;
         }
 
         @Override
         public int previousIndex() {
-            return 0;
+            return index - 1;
         }
 
-        //удаляет элемент который прошли методом next или prev
         @Override
         public void remove() {
-
+            Node current = currentBegin;
+            if(invert) current = currentEnd;
+            if (current == first) {
+                removeFirst();
+            }
+            else if (current == last) {
+                removeLast();
+            }
+            else {
+                current.getPrev().setNext(current.getNext());
+                currentEnd.getNext().setPrev(current.getPrev());
+                index--;
+            }
         }
-        //удаляет элементу который прошли методом next или prev
+
         @Override
         public void set(T t) {
-
+            Node current = currentBegin;
+            if(invert) current = currentEnd;
+            current.setValue(t);
         }
-        //добавить эелемент после элемента который прошли методом next или prev
-        // в направлении куда шли.
+
         @Override
         public void add(T t) {
-
+            insert(size(), t);
         }
     }
 
@@ -90,6 +110,7 @@ public class MyLinkedList<T> implements Iterable<T> {
             this.value = value;
             this.next = next;
         }
+
 
         public Node(T value) {
             this.value = value;
