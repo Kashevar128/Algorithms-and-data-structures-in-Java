@@ -92,6 +92,8 @@ public class MyLinkedList<T> implements Iterable<T> {
         @Override
         public void add(T t) {
             insert(size(), t);
+            currentBegin = new Node(null, first);
+            currentEnd = new Node(last, null, null);
         }
     }
 

@@ -69,7 +69,14 @@ public class Main {
 
         System.out.println(mll);
 
+        count = 0;
+        while (li.hasPrevious() && count <= 1) {
+            System.out.println(li.previous());
+            li.remove();
+            count++;
+        }
 
+        System.out.println(mll);
 
     }
 }
