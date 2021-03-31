@@ -14,6 +14,8 @@ public class Main {
         System.out.println(multiply(3,8));
         System.out.println(recMultiply(3,8));
 
+        System.out.println(exponention(5, 7));
+
     }
 
     public static int fact(int n) {
@@ -79,5 +81,9 @@ public class Main {
         }
         return recMultiply(a, b - 1) + a;
     }
+     public static int exponention(int number, int degree) {
+        if (degree == 1) return  number;
+        return number * exponention(number,degree - 1);
+     }
 
 }
