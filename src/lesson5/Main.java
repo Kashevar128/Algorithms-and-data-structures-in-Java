@@ -3,10 +3,10 @@ package lesson5;
 public class Main {
     public static void main(String[] args) {
 //        System.out.println(fact(5));
-        System.out.println(recFact(5));
+       // System.out.println(recFact(5));
 
 //        System.out.println(fibo(47));
-        System.out.println(recFibo(10));
+       // System.out.println(recFibo(10));
 
 //        System.out.println(triangleNum(5));
 //        System.out.println(recTriangleNum(5));
@@ -15,6 +15,18 @@ public class Main {
         System.out.println(recMultiply(3,8));
 
         System.out.println(exponention(5, 7));
+
+        Item[] arrOfItems = {new Item(1, 3),
+                new Item(6, 4),
+                new Item(4, 5),
+                new Item(7, 8),
+                new Item(6, 9)};
+
+        Bagpack bagpack = new Bagpack(arrOfItems);
+        int bagpackCapacity = 13;
+        System.out.println(bagpack.findBestSum(arrOfItems.length - 1, bagpackCapacity));
+
+       
 
     }
 
@@ -85,5 +97,7 @@ public class Main {
         if (degree == 1) return  number;
         return number * exponention(number,degree - 1);
      }
+
+
 
 }
