@@ -3,23 +3,23 @@ package lesson4;
 public class MyLinkedStack<T> {
     private MyLinkedList<T> ll = new MyLinkedList<>();
 
-    public void push(T item){
-
+    public void push(T item) {
+        ll.insertLast(item);
     }
 
-    public T peek(){
-        return null;
+    public T peek() {
+        return ll.getLast();
     }
 
-    public T pop(){
-        return null;
+    public T pop() {
+        return ll.removeLast();
     }
 
-    public int size(){
+    public int size() {
         return ll.size();
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return ll.isEmpty();
     }
 }
