@@ -7,7 +7,7 @@ public class MyPriorityQueue<T extends Comparable<T>> {
     private T[] list;
     private int size;
     private int capacity;
-    private final int DEFAULT_CAPACITY = 10;
+    private final int DEFAULT_CAPACITY = 5;
 
     public MyPriorityQueue(int capacity) {
         if (capacity <= 0) {
@@ -23,16 +23,13 @@ public class MyPriorityQueue<T extends Comparable<T>> {
     }
 
     public void insert(T item) {
-        if (isFull()) {
-            //реализовать расширение массива
-            throw new StackOverflowError("Очередь заполнена");
-        }
+        autoExtension(size);
         list[size] = item;
         size++;
 
         int i = size - 1;
-        while (i > 0 && list[i-1].compareTo(list[i]) < 0) {
-            swap(i, i-1);
+        while (i > 0 && list[i - 1].compareTo(list[i]) < 0) {
+            swap(i, i - 1);
             i--;
         }
     }
@@ -68,6 +65,13 @@ public class MyPriorityQueue<T extends Comparable<T>> {
         T[] tempArr = (T[]) new Comparable[newCapacity];
         System.arraycopy(list, 0, tempArr, 0, size);
         list = tempArr;
+    }
+
+    public void autoExtension(int size) {
+        if (isFull()) {
+            int cap = (int) (size * 1.5);
+            reCapacity(cap);
+        }
     }
 
     private void swap(int index1, int index2) {
