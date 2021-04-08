@@ -10,21 +10,30 @@ public class Main {
 
         chm.put(1, "one");
         chm.put(2, "two");
-        chm.put(3, "three");
+        chm.put(4, "three");
+        chm.put(5, "three");
+        chm.put(6, "three");
+        chm.put(7, "three");
+        chm.put(8, "three");
+        chm.put(9, "three");
+        chm.put(10, "three");
+        chm.put(11, "three");
+        chm.put(12, "three");
+        chm.put(13, "three");
+        chm.put(14, "three");
+        chm.put(15, "three");
+        chm.put(16, "three");
 
-        System.out.println(chm.get(1));
-        System.out.println(chm.get(2));
-        System.out.println(chm.get(3));
+        for (int i = 1; i <= 16; i++) {
+            System.out.println(chm.get(i));
+        }
 
-        System.out.println(chm);
-
-        chm.delete(2);
-
-        System.out.println(chm);
-
-        System.out.println(chm.get(1));
-        System.out.println(chm.get(2));
-        System.out.println(chm.get(3));
+//
+//        chm.delete(2);
+//
+//        System.out.println(chm.get(1));
+//        System.out.println(chm.get(2));
+//        System.out.println(chm.get(3));
 
 //        for (int i = 0; i < 12; i++) {
 //            chm.put(random.nextInt(100), "");
